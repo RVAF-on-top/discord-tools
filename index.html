@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>wtfd</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            height: 100vh;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #007acc;
+            color: #ffffff;
+        }
+
+        .sidebar {
+            width: 240px;
+            background-color: #2e2e2e;
+            border-right: 1px solid #444;
+            padding: 10px;
+            overflow-y: auto;
+        }
+
+        .sidebar h2 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .tool {
+            padding: 10px;
+            margin-bottom: 8px;
+            background-color: #3a3a3a;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .tool:hover {
+            background-color: #575757;
+        }
+
+
+        .btn {
+            padding: 10px;
+            margin-bottom: 8px;
+            background-color: #ffffff;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+
+
+        .active {
+            background-color: #007acc;
+        }
+
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .tool-content {
+            display: none;
+        }
+
+        .tool-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <h2>RVAF-Raider</h2>
+        <div class="tool" onclick="selectTool('TknChecker', this)">TokenChecker</div>
+        <div class="tool" onclick="selectTool('Raider', this)">Raider</div>
+        <div class="tool" onclick="selectTool('GLeaver', this)">GroupLeaver</div>
+        <div class="tool" onclick="selectTool('GSpammer', this)">GroupSpammer</div>
+        <div class="tool" onclick="selectTool('WSpammer', this)">WebhookSpammer</div>
+    </div>
+
+    <div class="content">
+        <div id="TknChecker" class="tool-content active">
+            <h1>TokenChecker</h1>
+            <p>複数トークンの状態をチェックできます。</p>
+            <textarea id="TknC-tokensInput" rows="6" style="width:100%; border-radius: 6px; height: 20vh;" placeholder="トークンを1行ずつ入力してください。"></textarea>
+            <button id="TknC-tknchecker-btn" class="btn" onclick="checkTokens()">チェック開始</button>
+            <textarea id="TknC-tokensResult" rows="6" style="width:100%; border-radius: 6px; height: 25vh;" placeholder="結果がここに表示されます"></textarea>
+            <textarea id="TknC-validResult" rows="6" style="width:100%; border-radius: 6px; height: 25vh;" placeholder="有効なトークンがここに表示されます"></textarea>
+            <button class="btn" onclick="copyID('TknC-tokensResult')">結果をコピーする</button>
+            <button class="btn" onclick="copyID('TknC-validResult')">有効なものだけをコピーする</button>
+        </div>
+        <div id="Raider" class="tool-content">
+            <h1>Raider</h1>
+            <p>複数トークンを使用してチャンネルをレイドすることができます。</p>
+            <textarea id="Raid-tokensInput" rows="6" style="width:100%; border-radius: 6px; height: 20vh;" placeholder="トークンを1行ずつ入力してください。"></textarea>
+            <textarea id="Raid-msgInput" rows="6" style="width:100%; border-radius: 6px; height: 20vh;" placeholder="送信するメッセージを入力してください。"></textarea>
+            <input id="Raid-ChidInput" type="text" style="width:100%; border-radius: 6px; height: 4vh;" placeholder="チャンネルIDを入力">
+            <button id="Raid-ToggleRaiding" class="btn" onclick="toggleRaiding()">Raid開始</button>
+            <textarea id="Raid-result" rows="6" style="width:100%; border-radius: 6px; height: 20vh;" placeholder="結果がここに表示されます:"></textarea>
+        </div>
+        <div id="GLeaver" class="tool-content">
+            <h1>GroupLeaver</h1>
+            <p>グループスパムをされた際にツールを使用してグループを退出することができます。※未実装</p>
+        </div>
+        <div id="GSpammer" class="tool-content">
+            <h1>GroupSpammer</h1>
+            <p>トークンを使用してグループスパムをすることができます。※未実装</p>
+        </div>
+        <div id="WSpammer" class="tool-content">
+            <h1>WebhookSpammer</h1>
+            <p>複数webhookを使用してスパムをすることができます。</p>
+            <textarea id="WSpam-urlsInput" rows="6" style="width:100%; border-radius: 6px; height: 20vh;" placeholder="webhookを1行ずつ入力してください。"></textarea>
+            <textarea id="WSpam-msgInput" rows="6" style="width:100%; border-radius: 6px; height: 20vh;" placeholder="送信するメッセージを入力してください。"></textarea>
+            <button id="WSpam-ToggleSpamming" class="btn" onclick="toggleWhSpam()">Spam開始</button>
+            <textarea id="WSpam-result" rows="6" style="width:100%; border-radius: 6px; height: 20vh;" placeholder="結果がここに表示されます:"></textarea>
+        </div>
+    </div>
+
+    <script src="script.js">
+    </script>
+</body>
+</html>
