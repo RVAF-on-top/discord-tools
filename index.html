@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>wtfd</title>
+    <title>RVAF-Raider</title>
     <style>
         * {
             box-sizing: border-box;
@@ -14,7 +14,7 @@
             display: flex;
             height: 100vh;
             font-family: 'Segoe UI', sans-serif;
-            background-color: #007acc;
+            background-color: #626263;
             color: #ffffff;
         }
 
@@ -57,7 +57,7 @@
 
 
         .active {
-            background-color: #007acc;
+            background-color: #626263;
         }
 
         .content {
@@ -79,15 +79,25 @@
 
     <div class="sidebar">
         <h2>RVAF-Raider</h2>
+        <div class="tool active" onclick="selectTool('Home', this)">Home</div>
         <div class="tool" onclick="selectTool('TknChecker', this)">TokenChecker</div>
         <div class="tool" onclick="selectTool('Raider', this)">Raider</div>
         <div class="tool" onclick="selectTool('GLeaver', this)">GroupLeaver</div>
         <div class="tool" onclick="selectTool('GSpammer', this)">GroupSpammer</div>
         <div class="tool" onclick="selectTool('WSpammer', this)">WebhookSpammer</div>
+        <div class="tool" onclick="selectTool('EAdder', this)">EmojiAdder</div>
     </div>
 
     <div class="content">
-        <div id="TknChecker" class="tool-content active">
+        <div id="Home" class="tool-content active">
+            <h1>RVAF-Raider</h1>
+            <h2>Discord招待リンク</h2>
+            <p><a href="https://discord.gg/Zc4CWJ7wk3"  style="text-decoration: none; color: greenyellow;">https://discord.gg/Zc4CWJ7wk3</a></p>
+            <br>
+            <h3>本ツールはプロキシが使用できません。使用する際はVPNを使用することを強くお勧めします。</h3>
+            <p id="ipaddr">取得中</p>
+        </div>
+        <div id="TknChecker" class="tool-content">
             <h1>TokenChecker</h1>
             <p>複数トークンの状態をチェックできます。</p>
             <textarea id="TknC-tokensInput" rows="6" style="width:100%; border-radius: 6px; height: 20vh;" placeholder="トークンを1行ずつ入力してください。"></textarea>
@@ -121,6 +131,21 @@
             <textarea id="WSpam-msgInput" rows="6" style="width:100%; border-radius: 6px; height: 20vh;" placeholder="送信するメッセージを入力してください。"></textarea>
             <button id="WSpam-ToggleSpamming" class="btn" onclick="toggleWhSpam()">Spam開始</button>
             <textarea id="WSpam-result" rows="6" style="width:100%; border-radius: 6px; height: 20vh;" placeholder="結果がここに表示されます:"></textarea>
+        </div>
+        <div id="EAdder" class="tool-content">
+            <h1>EmojiAdder</h1>
+            <p>ユーザートークンを利用してサーバーの絵文字を大量に追加することができます。</p>
+            <input type="text" id="EA-token" style="width:100%; border-radius: 6px; height: 4vh;" placeholder="あなたのDiscordユーザーのトークンを入力してください">
+            <input type="text" id="EA-guildId" style="width:100%; border-radius: 6px; height: 4vh;" placeholder="絵文字を追加したいサーバーのIDを入力してください">
+            <textarea id="EA-emojiNames" style="width:100%; border-radius: 6px; height: 10vh;" placeholder="絵文字名を入力してください (カンマ区切り、空欄可、自動生成時は無視されます)"></textarea>
+            <textarea id="EA-emojiUrls" style="width:100%; border-radius: 6px; height: 10vh;" placeholder="絵文字URLを入力してください (カンマ区切り):"></textarea>
+            <label for="EA-numEmojisToAdd">追加する絵文字の数 (URLが少ない場合、繰り返し利用):</label>
+            <input type="number" id="EA-numEmojisToAdd" style="width:100%; border-radius: 6px; height: 4vh;" value="1" min="1">
+            <label for="EA-delay">絵文字追加間の待機時間 (秒):</label>
+            <input type="number" id="EA-delay" style="width:100%; border-radius: 6px; height: 4vh;" value="1" min="0">
+            <button class="btn" onclick="EA_addEmojis(false)">指定した名前で絵文字を追加</button>
+            <button class="btn" onclick="EA_addEmojis(true)">名前を自動生成して絵文字を追加</button>
+            <textarea id="EA-log" style="width:100%; border-radius: 6px; height: 20vh;" readonly></textarea>
         </div>
     </div>
 
