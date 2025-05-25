@@ -139,9 +139,9 @@
             <input type="text" id="EA-guildId" style="width:100%; border-radius: 6px; height: 4vh;" placeholder="絵文字を追加したいサーバーのIDを入力してください">
             <textarea id="EA-emojiNames" style="width:100%; border-radius: 6px; height: 10vh;" placeholder="絵文字名を入力してください (カンマ区切り、空欄可、自動生成時は無視されます)"></textarea>
             <textarea id="EA-emojiUrls" style="width:100%; border-radius: 6px; height: 10vh;" placeholder="絵文字URLを入力してください (カンマ区切り):"></textarea>
-            <label for="EA-numEmojisToAdd">追加する絵文字の数 (URLが少ない場合、繰り返し利用):</label>
+            <p>追加する絵文字の数 (URLが少ない場合、繰り返し利用):</p>
             <input type="number" id="EA-numEmojisToAdd" style="width:100%; border-radius: 6px; height: 4vh;" value="1" min="1">
-            <label for="EA-delay">絵文字追加間の待機時間 (秒):</label>
+            <p>絵文字追加間の待機時間 (秒):</p>
             <input type="number" id="EA-delay" style="width:100%; border-radius: 6px; height: 4vh;" value="1" min="0">
             <button class="btn" onclick="EA_addEmojis(false)">指定した名前で絵文字を追加</button>
             <button class="btn" onclick="EA_addEmojis(true)">名前を自動生成して絵文字を追加</button>
